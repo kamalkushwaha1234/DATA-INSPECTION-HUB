@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Titleg</title>
+</head>
+<body>
+<p>        # Read the CSV file using pandas
+       ''' df = pd.read_csv(csv_file)
+        df=df.head()'''
+
+        # Apply some data extraction operations
+        '''df = df.drop_duplicates() # Remove duplicates
+        df = df.groupby(['column_name']).sum() '''# Group by a column and sum up values
+
+        # Convert the pandas dataframe to an HTML table
+        '''html_table = df.to_html(classes='table table-striped')'''
+
+
+    '''csv_file2=csv_file1
+        p=is_csv_file(csv_file1)
+        if(p!=True):
+            html_table="please enter the csv file"
+            return render(request, 'index.html', {'html_table': html_table})
+
+
+        else:
+
+            df = pd.read_csv(csv_file2)
+            df = df.head()
+            html_table = df.to_html(classes='table table-striped')
+            return render(request, 'output.html', {'html_table': html_table})'''
+
+
+    # views.py
+
+import pandas as pd
+
+def is_csv_file(filename):
+    try:
+
+        header = pd.read_csv(filename, nrows=1).columns.tolist()
+        return all(isinstance(col, str) for col in header)
+        return True
+    except:
+        return False
+
+from django.shortcuts import render
+
+
+def index(request):
+    if request.method == 'POST':
+        # Get the uploaded file from the request object
+        csv_file1 = request.FILES["csvFile"]
+        csv_file2=csv_file1
+        p=is_csv_file(csv_file1)
+        if(p!=True):
+            html_table="please enter the csv file"
+            return render(request, 'index.html', {'html_table': html_table})
+
+
+        df = pd.read_csv(csv_file2)
+        df = df.head()
+        html_table = df.to_html(classes='table table-striped')
+        return render(request, 'output.html', {'html_table': html_table})
+
+    return render(request, 'index.html')
+
+</p>
+</body>
+</html>

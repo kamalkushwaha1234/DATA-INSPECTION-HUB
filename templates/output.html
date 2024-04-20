@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>output</title>
+    	<style>
+		#info {
+			display: none;
+		}
+	</style>
+</head>
+<body>
+
+
+  <h2 style="background-color:Tomato;">It's how data look/First view on data </h2>
+
+{% block content %}
+
+  {{df1|safe}}
+
+       <p style="border:2px  solid Orange;">   </p><br>
+  <h2 style="background-color:Tomato;">Number of rows and column</h2>
+  <p>In the Dataset the number of row is {{row}} and the number of columns is {{col}}</p>
+<p style="border:2px  solid Orange;">   </p><br>
+<h2 style="background-color:Tomato;">List's of  features which Dataset contain</h2>
+  <p>
+{% for i in df2 %}
+{{i }} &nbsp;&nbsp;&nbsp;&nbsp;
+{%endfor%}
+  </p>
+     <p style="border:2px solid Orange;"> </p><br>
+
+  <h2 style="background-color:Tomato;">Datatype of features </h2>
+  <p> NUMERIC:-
+{% for j in df3 %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%} </p>
+
+    <p> STRING:-
+{% for j in df5 %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%} </p>
+
+<p style="border:2px solid Orange;"> </p><br>
+    <h2 style="background-color:Tomato;">Varible Type of Features</h2>
+   <p>Feature Contain Boolean variables:-
+{% if not boolean_cols %}
+NULL
+{% else %}
+{% for j in boolean_cols %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%}
+{% endif %}
+ </p>
+   <p>Feature Contain Categorical variables :-
+ {% if not categorical_cols %}
+NULL
+{% else %}
+{% for j in categorical_cols %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%}
+{% endif %}
+ </p>
+  <p>Feature Contain Ordinal variables :-
+ {% if not ordinal_cols %}
+NULL
+{% else %}
+{% for j in ordinal_cols %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%}
+{% endif %}
+ </p>
+    <p>Feature Contain Continuous variables :-
+ {% if not continuous_cols %}
+NULL
+{% else %}
+{% for j in continuous_cols %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%}
+{% endif %}
+ </p>
+      <p>Feature Contain Discrete variables :-
+ {% if not discrete_cols %}
+NULL
+{% else %}
+{% for j in discrete_cols %}
+{{ j }}&nbsp;&nbsp;&nbsp;
+{%endfor%}
+{% endif %}
+ </p>
+  <button onclick="toggleInfo()">Click for more information</button>
+	<div id="info">
+		<p>Categorical variables: These are variables that represent categories or groups, such as gender, ethnicity, occupation, or product type.<br>
+        Boolean variables: These are variables that take on one of two possible values, such as "yes" or "no", "true" or "false", or 1 or 0.<br>
+        Ordinal variables: These are categorical variables that have a natural ordering or ranking, such as education level (e.g., high school, college, graduate school) or income level (e.g., low, medium, high).<br>
+        Continuous variables: These are numeric variables that can take on an infinite number of values within a certain range, such as time, distance, or temperature.<br>
+        Discrete variables: These are numeric variables that can only take on a finite number of values within a certain range, such as the number of children in a family or the number of products sold by a company in a day.</p>
+	</div>
+	<script>
+		function toggleInfo() {
+			var info = document.getElementById("info");
+			if (info.style.display === "none") {
+				info.style.display = "block";
+			} else {
+				info.style.display = "none";
+			}
+		}
+	</script>
+
+   <p style="border:2px  solid Orange;">   </p>
+  <h2 style="background-color:Tomato;" >Dataset contain any null value or not</h2>
+{% for k in df4 %}
+{{k}}&nbsp;&nbsp;&nbsp;
+{%endfor%}
+{{strp}}
+<p style="border:2px solid Orange;"> </p><br>
+  <h2 style="background-color:Tomato;">Duplicated Records</h2>
+  <p>Number of Duplicate records is {{dup}}</p>
+<p style="border:2px solid Orange;"> </p><br>
+    <h2 style="background-color:Tomato;">Effect of duplicate value in dataset</h2>
+  <p><b>Advantages:</b><br>
+
+Increased sample size: Duplicate records can increase the sample size of the dataset, which can be beneficial for training machine learning models.<br>
+
+Increased accuracy: If the dataset contains duplicate records, the model can use this to weigh certain records more heavily, which can lead to increased accuracy in predictions.<br><br>
+<b>Disadvantages:</b>
+
+Biased results: Duplicate records can skew the results of the analysis, leading to biased or inaccurate predictions.<br>
+Reduced performance: Duplicate records can make the training process longer, reducing the performance of machine learning models. <br>
+
+Overfitting: Duplicate records can lead to overfitting, where the model becomes too reliant on specific data points in the dataset and performs <br>poorly when presented with new data.<br><br>
+Overall, while duplicate records can increase the sample size and accuracy of a dataset, it is generally best to avoid them, as they can introduce biases and negatively impact the performance of machine learning models.</p>
+<p style="border:2px solid Orange;"> </p><br>
+
+
+ <h2 style="background-color:Tomato;">Some Information About NUMERIC Features</h2>
+  <p style=" text-align: left;
+   
+    width: 100%;">
+ <b>count</b>: The number of non-null values in each column. If a column has missing values,
+    <br>the count value will be lower than the total number of rows in the DataFrame.<br>
+<b>mean</b>: The average value of each column.<br>
+<b>std</b>: The standard deviation of each column. It measures how much the values in a column deviate from the mean.<br>
+<b>min</b>: The minimum value of each column.<br>
+<b>25%, 50%, 75%</b>: The quartile values of each column. The quartiles divide the values in a column into four equal parts.
+    <br>The 25th percentile is the value below which 25% of the observations fall, the 50th percentile is the median
+    <br>or the value below which 50% of the observations fall and the 75th percentile is the value below which 75% of
+    <br>the observations fall.<br>
+<b>max</b>: The maximum value of each column.</p>
+  {{df6|safe}}
+
+       <p style="border:2px  solid Orange;">   </p>
+<h2 style="background-color:Tomato;">Some Information About STRING Features</h2>
+{% for j in pie_chart %}
+
+
+  <img src="data:image/png;base64,{{ j}}" /><br>
+  {%endfor%}
+<p style="border:2px  solid Orange;">   </p>
+
+<h2 style="background-color:Tomato;"> Data distribution</h2>
+<p>It is recommended to check the data distribution of each feature/column in the dataset before splitting the data into independent and dependent variables. This is because the distribution of the data may affect the modeling process and may require different preprocessing steps depending on the type of distribution.</p>
+{% for i in box_chart %}
+
+
+  <img src="data:image/png;base64,{{ i}}" /><br>
+  {%endfor%}
+
+  <p style="border:2px  solid Orange;">   </p>
+<h2 style="background-color:Tomato;">Skewness and Kurtosis</h2>
+<p> A normal distribution should have a skewness value of zero and a kurtosis value of 3.<br>
+    If the skewness is negative, the distribution is skewed to the left, and if the skewness is positive, the distribution is skewed to the right.<br>
+    If the kurtosis is less than 3, the distribution is platykurtic (flatter than normal), and if it is greater than 3, it is leptokurtic (more peaked than normal).</p>
+
+  {%endblock%}
+  <p style="border:2px  solid Orange;">   </p>
+</body>
+</html>

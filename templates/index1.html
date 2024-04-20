@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <title>All About Data</title>
+        <link rel="stylesheet" href="/static/css/style2.css"/>
+
+
+
+
+    </head>
+
+    <body>
+        <header class="navbar">
+          <a href="#" class="logo">All about Data</a>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Services</a></li>
+            </ul>
+        </header>
+        <img src="/static/img/bg.jpg"/>
+
+         <div class="centered-text">
+            <h1>All About Data</h1>
+            <p><br>Welcome to All About Data! Here you can learn everything about data and its analysis.</p>
+             <h3> {{ html_table}}</h3>
+            <form  method="post"  enctype="multipart/form-data" >
+                {% csrf_token %}
+
+                <label for="csvFile"><br>Upload a CSV file:</label>
+
+                <input button type="file" id="csvFile" name="csvFile">
+                <br>
+                <button type="submit"> Submit</button>
+            </form>
+        </div>
+
+
+
+    </body>
+</html>
